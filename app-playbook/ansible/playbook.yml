@@ -1,0 +1,15 @@
+---
+- hosts: all
+  become: yes
+
+  pre_tasks:
+    - name: Update apt cache if needed.
+      apt: update_cache=yes cache_valid_time=604800
+
+  handlers:
+    - include: handlers/handlers.yml
+
+  tasks:
+    - include: tasks/common.yml
+    - include: tasks/totara.yml
+    - include: tasks/psql.yml
